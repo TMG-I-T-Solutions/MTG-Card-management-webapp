@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const path = require('path'); // Import the path module
 
 const app = express();
 const port = 3000;

@@ -72,9 +72,17 @@ router.get('/', (req, res) => {
   });
   
   // Delete a card
-  router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const { id } = req.params;
     const sql = 'DELETE FROM cards WHERE id = ?';
     db.query(sql, [id], (err, result) => {
       if (err) {
-        console.error('Error deleting card:
+        console.error('Error deleting card: ', err);
+        res.status(500).json({ error: 'An error occurred while deleting the card' });
+        return;
+      }
+      res.sendStatus(204);
+    });
+  });
+  
+  module.exports = router;
