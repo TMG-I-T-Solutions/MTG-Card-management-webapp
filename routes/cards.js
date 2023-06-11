@@ -10,6 +10,22 @@ const db = mysql.createConnection({
     database: 'card inventory application'
   });
 
+  // Create a new card
+router.post('/', (req, res) => {
+    const { name, price, quantity, manaCost, color } = req.body;
+    const sql = 'INSERT INTO cards (name, price, quantity, mana_cost, color) VALUES (?, ?, ?, ?, ?)';
+    const values = [name, price, quantity, manaCost, color];
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error('Error creating card: ', err);
+        res.status(500).json({ error: 'An error occurred while creating the card' });
+        return;
+      }
+      const cardId = result.insertId;
+      res.status(201).json({ cardId });
+    });
+  });
+
   // Get all cards
 router.get('/', (req, res) => {
     const sql = 'SELECT * FROM cards';
