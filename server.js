@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
 // API routes for cards
 app.use('/cards', require('./routes/cards'));
 
+// Start the server
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-  });
+  console.log(`Server running on port ${port}`);
+});
